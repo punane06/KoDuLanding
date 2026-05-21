@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KoDu — The customer experience platform that keeps homebuyers informed, engaged and confident from contract to handover." />
+  <title>KoDu — From Chaos to Clarity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f4f4f4;
+      --navy: #223F43;
+      --navy-mid: #2d5257;
+      --bronze: #FACC58;
+      --bronze-light: #FACC58;
+      --warm-grey: #7a8f92;
+      --light-blue: #CAD4DA;
+      --near-black: #262626;
+      --white: #FFFFFF;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--navy);
+      font-family: var(--sans);
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: multiply;
+      background-color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .nav-tagline {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--warm-grey);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background-color: var(--navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 10rem;
+      position: relative;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(250,204,88,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-side-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #FACC58;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stat {
+      font-family: var(--serif);
+      font-size: clamp(7rem, 14vw, 11rem);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.2s;
+    }
+
+    .hero-stat span {
+      color: var(--bronze-light);
+    }
+
+    .hero-stat-label {
+      margin-top: 1.75rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--light-blue);
+      max-width: 280px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+
+    .hero-right {
+      background-color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 6rem 5rem 2rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background-color: var(--navy-mid);
+      
+      color: var(--bronze);
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--navy-mid);
+      font-weight: 500;
+      max-width: 400px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.7s;
+    }
+
+    .demo-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.9s;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 50px;
+    }
+
+    .btn-primary {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--navy-mid);
+      transform: translateX(4px);
+    }
+
+    .btn-secondary {
+      background-color: var(--bronze);
+      color: var(--near-black);
+    }
+    .btn-dashboard {
+      background-color: #CAD4DA;
+    }
+    .btn-secondary:hover {
+      background-color: #b8c5cc;
+      transform: translateX(4px);
+    }
+
+    .btn-arrow {
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .btn-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .btn-sublabel {
+      font-size: 0.7rem;
+      font-weight: 300;
+      opacity: 0.6;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(22, 38, 42, 0.88);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+    }
+
+    .lightbox-overlay[open] {
+      display: flex;
+    }
+
+    .lightbox-overlay::backdrop {
+      display: none;
+    }
+
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+      object-fit: contain;
+      cursor: default;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    .lightbox-close:hover {
+      color: var(--white);
+    }
+
+
+    /* ── VALUE PROPS ── */
+    .value-section {
+      padding: 7rem 3rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .value-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding-top: 0.5rem;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .value-item {
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(34, 63, 67, 0.12);
+    }
+
+    .value-number {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      opacity: 0.9;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .value-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .value-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.8;
+      color: var(--navy-mid);
+    }
+    /* ── BEFORE / AFTER ── */
+
+    .comparison-section {
+      padding: 7rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .comparison-header {
+      margin-bottom: 4rem;
+    }
+
+    .comparison-eyebrow {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .comparison-headline {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--navy);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .comparison-column {
+      padding: 2.5rem;
+      border: 1px solid rgba(34, 63, 67, 0.12);
+      border-radius: 32px;
+      background-color: rgba(255,255,255,0.4);
+    }
+
+    .comparison-column-highlight {
+      background-color: var(--navy);
+    }
+
+    .comparison-column-highlight .comparison-title,
+    .comparison-column-highlight .comparison-item {
+      color: var(--white);
+    }
+
+    .comparison-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      color: var(--navy);
+    }
+
+    .comparison-item {
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1;
+      color: var(--navy-mid);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(34, 63, 67, 0.08);
+    }
+
+    .comparison-item:last-child {
+      border-bottom: none;
+    }
+
+    /* ── TIMING ── */
+    .timing-section {
+      background-color: var(--navy);
+      padding: 7rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timing-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(250,204,88,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .timing-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .timing-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .timing-headline {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .timing-headline em {
+      font-style: italic;
+      color: var(--bronze-light);
+    }
+
+    .timing-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--light-blue);
+    }
+
+    .timing-points {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .timing-point {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .timing-point-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--bronze-light);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+
+    .timing-point-text {
+      padding-top: 0.2rem;
+    }
+
+    .timing-point-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .timing-point-body {
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--light-blue);
+    }
+
+    /* ── FINAL CTA ── */
+
+    .final-cta {
+      padding: 7rem 3rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .final-cta-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .final-cta-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .final-cta-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      font-weight: 400;
+      color: var(--navy-mid);
+      max-width: 650px;
+      margin: 0 auto 3rem;
+    }
+
+    .final-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      background-color: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      transition: all 0.3s ease;
+    }
+
+    .final-cta-button:hover {
+      background-color: var(--navy-mid);
+      transform: translateY(-2px);
+    }
+
+    .final-cta-faces {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(34, 63, 67, 0.1);
+    }
+
+    .final-cta-face {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .final-cta-face img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid rgba(34, 63, 67, 0.12);
+    }
+
+    .final-cta-face-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+    }
+
+    .final-cta-face-role {
+      font-size: 0.7rem;
+      color: var(--warm-grey);
+      letter-spacing: 0.08em;
+      margin-top: -0.5rem;
+    }
+
+    .final-contact {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      max-width: 500px;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    .final-contact .profile-image {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .final-contact h2 {
+      margin-bottom: 0.25rem;
+    }
+
+    .final-contact p {
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(26,35,53,0.1);
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+    }
+
+    .footer-year {
+      font-size: 0.75rem;
+      color: var(--warm-grey);
+    }
+
+    .social-icon {
+      width: 30px;
+      margin-left: 0.75rem;
+      transition: filter 0.3s ease;
+    }
+
+    .final-contact-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content:space-around;
+    }
+
+    .footer-origin {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .footer-cta {
+      font-size: 0.8rem;
+      color: var(--bronze);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--bronze);
+      padding-bottom: 0.1rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-cta:hover { opacity: 0.6; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-section {
+        padding: 5rem 1.5rem;
+      }
+
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-tagline { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 8rem 2rem 3rem;
+        min-height: 40vh;
+      }
+
+      .hero-right {
+        padding: 3rem 2rem 5rem;
+      }
+
+      .hero-body { max-width: 100%; }
+
+      .value-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 5rem 1.5rem;
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .timing-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .timing-section { padding: 5rem 1.5rem; }
+
+      .section-divider { margin: 0 1.5rem; }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">KoDu</a>
+    <span class="nav-tagline">From Chaos to Clarity</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-side-label">Buyer experience insight</p>
+      <div class="hero-stat">91<span>%</span></div>
+      <p class="hero-stat-label">of homebuyers who waited for a new build say their experience would have been better with an app or portal.</p>
+    </div>
+    <div class="hero-right">
+      <p class="hero-eyebrow">Customer Experience for Real Estate</p>
+      <h1 class="hero-headline">From Chaos<br/>to <em>Clarity</em> —<br/>for every homebuyer<br/>waiting for their keys.</h1>
+      <p class="hero-body">KoDu gives homebuyers one place for updates, documents, communication and construction progress — while reducing repetitive work for developers.</p>
+      <div class="demo-buttons">
+        <button href="#" class="btn btn-primary" onclick="openLightbox('liis.png'); return false;">
+          <div class="btn-label">
+            <span>See the buyer experience</span>
+            <span class="btn-sublabel">Mobile · Liisi's view</span>
+          </div>
+          <span class="btn-arrow">→</span>
+        </button>
+        <button href="#" class="btn btn-secondary btn-dashboard" onclick="openLightbox('anu.png'); return false;">
+          <div class="btn-label">
+            <span>Explore the developer view</span>
+            <span class="btn-sublabel">Tablet · Anu's view</span>
+          </div>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- VALUE PROPS -->
+  <section class="value-section">
+    <p class="value-label">The KoDu experience</p>
+    <div class="value-grid">
+      <div class="value-item">
+        <div class="value-number">01</div>
+        <div class="value-title">Live construction progress</div>
+        <p class="value-text">Construction milestones, photos and progress — delivered to buyers automatically. No chasing, no silence.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-number">02</div>
+        <div class="value-title">Document access</div>
+        <p class="value-text">Contracts, floor plans, permits — all in one place. Buyers find what they need without calling your sales team.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-number">03</div>
+        <div class="value-title">Interior selections</div>
+        <p class="value-text">Interior selection tools that guide buyers through choices without flooding your inbox.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-number">04</div>
+        <div class="value-title">AI-powered answers</div>
+        <p class="value-text">Common questions answered instantly from documents. The questions that matter reach you — the rest don't.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- BEFORE VS AFTER -->
+<section class="comparison-section">
+  <div class="comparison-header">
+    <p class="comparison-eyebrow">Why KoDu matters</p>
+    <h2 class="comparison-headline">
+      From fragmented communication<br/>
+      to a connected buyer experience.
+    </h2>
+  </div>
+
+  <div class="comparison-grid">
+
+    <div class="comparison-column">
+      <div class="comparison-title">Before KoDu</div>
+
+      <div class="comparison-item">
+        Endless buyer emails and calls
+      </div>
+
+      <div class="comparison-item">
+        Buyers feel left in the dark
+      </div>
+
+      <div class="comparison-item">
+        Documents buried in inboxes
+      </div>
+
+      <div class="comparison-item">
+        Repetitive support questions
+      </div>
+
+      <div class="comparison-item">
+        Stress during long construction periods
+      </div>
+    </div>
+
+    <div class="comparison-column comparison-column-highlight">
+      <div class="comparison-title">With KoDu</div>
+
+      <div class="comparison-item">
+        One shared source of truth
+      </div>
+
+      <div class="comparison-item">
+        Buyers stay informed automatically
+      </div>
+
+      <div class="comparison-item">
+        All project information in one place
+      </div>
+
+      <div class="comparison-item">
+        Instant answers from project documents
+      </div>
+
+      <div class="comparison-item">
+        A calmer and more transparent experience
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <div class="section-divider"></div>
+
+  <!-- TIMING / MARKET ARGUMENT -->
+  <section class="timing-section">
+    <div class="timing-inner">
+      <div>
+        <p class="timing-eyebrow">Why now</p>
+        <h2 class="timing-headline">A boom market<br/><em>forgives</em> bad experience.<br/>This market doesn't.</h2>
+        <p class="timing-body">When every unit sells in a weekend, experience is easy to ignore. When it takes months — or years — the developer who makes buyers feel informed and involved has a real edge. KoDu turns a sales process into a relationship. Relationships close deals that price alone won't.</p>
+      </div>
+      <div class="timing-points">
+        <div class="timing-point">
+          <div class="timing-point-num">I</div>
+          <div class="timing-point-text">
+            <div class="timing-point-title">Retention over acquisition</div>
+            <p class="timing-point-body">In a slow market you cannot afford buyers losing confidence before handover. KoDu keeps them engaged and invested in the home they're waiting for.</p>
+          </div>
+        </div>
+        <div class="timing-point">
+          <div class="timing-point-num">II</div>
+          <div class="timing-point-text">
+            <div class="timing-point-title">Referrals become your pipeline</div>
+            <p class="timing-point-body">When new leads are scarce, a buyer who tells three friends is worth more than any ad spend. Exceptional experience is the product.</p>
+          </div>
+        </div>
+        <div class="timing-point">
+          <div class="timing-point-num">III</div>
+          <div class="timing-point-text">
+            <div class="timing-point-title">The window to pilot is now</div>
+            <p class="timing-point-body">Implementing during a quieter period means no disruption to a sales frenzy. The developers building trust now will lead the market later.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <p class="final-cta-eyebrow">See KoDu in action</p>
+
+  <h2 class="final-cta-headline">
+    Ready to improve<br/>
+    the homebuyer experience?
+  </h2>
+
+  <p class="final-cta-body">
+    We'd love to show you how KoDu could fit into your projects and customer journey.
+  </p>
+
+  
+ <div class="final-contact">
+  <div>
+    <img class="profile-image" src="Patricia.jpg" alt="Patricia Malm" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;" />
+    <div class="final-contact-info">
+      <h2>Patricia Malm</h2>
+      <a href="https://www.linkedin.com/in/patricia-malm-905256b2/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="linkedin.png" alt="LinkedIn"></a>
+    </div>
+    <p>Co-founder, KoDu</p>
+    <a href="mailto:patricia.k.malm@gmail.com" class="final-cta-button">
+    Get in touch →</a>
+  </div>
+  <div>
+    <img class="profile-image" src="Sille.png" alt="Sille Lass" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;" />
+    <div class="final-contact-info">
+      <h2>Sille Lass</h2>
+      <a href="https://www.linkedin.com/in/sille-lass-74bb293b1/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="linkedin.png" alt="LinkedIn"></a>
+    </div>
+    <p>Co-founder, KoDu</p>
+    <a href="mailto:sille.jyrimaa@gmail.com" class="final-cta-button">
+    Get in touch →</a>
+  </div>
+ </div>
+ 
+
+</section>
+  <!-- LIGHTBOX -->
+  <dialog class="lightbox-overlay" id="lightbox" aria-label="Image viewer">
+    <button class="lightbox-close" style="color:var(--navy)" onclick="closeLightbox()">×</button>
+    <img id="lightbox-img" alt="" />
+  </dialog>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      lightbox.showModal();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.close();
+    }
+    lightbox.addEventListener('close', function() {
+      document.body.style.overflow = '';
+    });
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === this) this.close();
+    });
+  </script>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">KoDu</div>
+    <span class="footer-origin">Built in Estonia</span>
+    <span class="footer-year">2026</span>
+  </footer>
+
+</body>
+</html>
